@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  
+  /* ADHD Friendly Low-Contrast Palette (OKLCH) */
+  --color-background: oklch(0.12 0.01 250);
+  --color-foreground: oklch(0.92 0.01 250);
+  
+  --color-card: oklch(0.16 0.01 250);
+  --color-card-foreground: oklch(0.92 0.01 250);
+  
+  --color-popover: oklch(0.12 0.01 250);
+  --color-popover-foreground: oklch(0.92 0.01 250);
+  
+  --color-primary: oklch(0.7 0.12 250);
+  --color-primary-foreground: oklch(0.12 0.01 250);
+  
+  --color-secondary: oklch(0.25 0.02 250);
+  --color-secondary-foreground: oklch(0.92 0.01 250);
+  
+  --color-muted: oklch(0.25 0.02 250);
+  --color-muted-foreground: oklch(0.65 0.01 250);
+  
+  --color-accent: oklch(0.3 0.05 250);
+  --color-accent-foreground: oklch(0.92 0.01 250);
+  
+  --color-destructive: oklch(0.6 0.15 20);
+  --color-destructive-foreground: oklch(0.98 0.01 20);
+  
+  --color-border: oklch(0.25 0.02 250);
+  --color-input: oklch(0.25 0.02 250);
+  --color-ring: oklch(0.7 0.12 250);
+
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+/* Globalna redukcja ruchu dla ADHD OS */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Minimalistyczny scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 4px;
+}

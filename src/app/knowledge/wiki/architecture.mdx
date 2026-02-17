@@ -1,0 +1,10 @@
+# Architektura Głębokiego Skupienia
+
+ADHD HUB nie jest standardową aplikacją CRUD. To system zaprojektowany do walki z rozproszeniem, co wymusza specyficzne wybory architektoniczne.
+
+## 1. Model Mentalny: Local-First
+Większość aplikacji dla neuroatypowych zawodzi, bo opóźnienia sieciowe (latency) zabijają impuls do działania. Nasz stos technologiczny jest **całkowicie odizolowany**:
+
+- **Baza Danych:** Lokalny PostgreSQL z obsługą wektorów (`pgvector`) dla przyszłych rozszerzeń — `docker-compose.yml:2`.
+- **ORM:** Drizzle. Wybrany ze względu na zero-runtime overhead i pełne wsparcie TypeScript — `src/db/index.ts`.
+- **Content:** MDX renderowany po stronie serwera, co zapewnia 100% rzetelności (zero halucynacji AI) — `src/app/knowledge/wiki/about.mdx`.

@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+.git
+.env
+*.md
+conductor
+initsystem.ps1
+initsystem.sh
+docker-compose.yml
+Dockerfile
+.dockerignore
+Skills DBs
+tmp
+ignore
+*.log

@@ -1,0 +1,61 @@
+services:
+  db:
+    container_name: adhdos_db
+    image: ankane/pgvector:latest
+    restart: always
+    environment:
+      POSTGRES_USER: adhdos_admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: adhdos_db
+    ports:
+      - "${ADHDOS_DB_PORT}:5432"
+    volumes:
+      - adhdos_db_data:/var/lib/postgresql/data
+    networks:
+      - adhdos_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adhdos_admin -d adhdos_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    container_name: adhdos_pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@adhdos.com
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${ADHDOS_PGADMIN_PORT}:80"
+    networks:
+      - adhdos_network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    container_name: adhdos_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://adhdos_admin:${POSTGRES_PASSWORD}@db:5432/adhdos_db
+      - JWT_SECRET=${JWT_SECRET}
+      - POLLINATIONS_API_KEY=${POLLINATIONS_API_KEY}
+    ports:
+      - "${ADHDOS_APP_PORT}:3000"
+    networks:
+      - adhdos_network
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  adhdos_network:
+    name: adhdos_network
+    driver: bridge
+
+volumes:
+  adhdos_db_data:
