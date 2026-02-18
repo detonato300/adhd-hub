@@ -31,7 +31,6 @@ ADHD HUB is an open-source, **local-first** cockpit designed specifically for ne
 | :--- | :--- |
 | **Bento Dashboard** | ![ADHD HUB Bento Grid Dashboard - Dark Mode and Low Contrast](./public/dashboard_preview.png) |
 | **Dopamine Menu** | ![Dopamine Menu Wizard - Linear UI to prevent decision paralysis](./public/dopamine_menu_wizard.png) |
-| **Knowledge Base** | ![MDX Knowledge Base with built-in Audio Reader](./public/knowledge_base_preview.png) |
 
 ### 🛠 Tech Stack
 
